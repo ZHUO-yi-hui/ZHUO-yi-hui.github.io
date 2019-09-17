@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="向上吧！少女~">
 <meta property="og:description" content="今天继续刷leetcode数组题，就做了一道题，待会还要看ppt哟~~题目是最佳观光组合；感觉和上次的盛最多水的容器有点像。给定正整数数组 A，A[i] 表示第 i 个观光景点的评分，并且两个景点 i 和 j 之间的距离为 j - i。 一对景点（i &amp;lt; j）组成的观光组合的得分为（A[i] + A[j] + i - j）：景点的评分之和减去它们两者之间的距离。 返回一对观光景点能取得的最高">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-16T12:26:15.835Z">
+<meta property="og:updated_time" content="2019-09-17T14:24:54.031Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="LEETCODE1014,最佳观光组合">
 <meta name="twitter:description" content="今天继续刷leetcode数组题，就做了一道题，待会还要看ppt哟~~题目是最佳观光组合；感觉和上次的盛最多水的容器有点像。给定正整数数组 A，A[i] 表示第 i 个观光景点的评分，并且两个景点 i 和 j 之间的距离为 j - i。 一对景点（i &amp;lt; j）组成的观光组合的得分为（A[i] + A[j] + i - j）：景点的评分之和减去它们两者之间的距离。 返回一对观光景点能取得的最高">
@@ -306,7 +306,7 @@
 <h2 id="示例："><a href="#示例：" class="headerlink" title="示例："></a>示例：</h2><p>输入：[8,1,5,2,6]<br>输出：11</p>
 <h2 id="解释"><a href="#解释" class="headerlink" title="解释:"></a>解释:</h2><p>i = 0, j = 2, A[i] + A[j] + i - j = 8 + 5 + 0 - 2 = 11</p>
 <h2 id="题解："><a href="#题解：" class="headerlink" title="题解："></a>题解：</h2><p>一开始看到这道题，直接按照题意来写暴力写代码，利用两个for循环和Math.max函数来求出A[I]+A[j]+i-j的最大值，信心满满提交，终于有道题会做的啦<del>但是，啊哦</del>超出时间限制。不能用暴力法来解决这道题。再仔细观察这个式子，发现可以分成两部分，left=A[i]+i和A[j]-j，只要求出这两部分的最大值即可。遍历数组，j&gt;i,若A[j]+j大于left，则不断更新left的最大值和返回值result的最大值。</p>
-<h2 id="暴力代码如下："><a href="#暴力代码如下：" class="headerlink" title="暴力代码如下："></a>暴力代码如下：</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxScoreSightseeingPair</span><span class="params">(<span class="keyword">int</span>[] A)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> n = A.length;</span><br><span class="line">		<span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt; n; j++) &#123;</span><br><span class="line">				<span class="keyword">int</span> max = A[i] + A[j] + i - j;</span><br><span class="line">				result = Math.max(max, result);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="暴力代码如下："><a href="#暴力代码如下：" class="headerlink" title="暴力代码如下："></a>暴力代码如下：</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxScoreSightseeingPair</span><span class="params">(<span class="keyword">int</span>[] A)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> n = A.length;</span><br><span class="line">	<span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt; n; j++) &#123;</span><br><span class="line">		<span class="keyword">int</span> max = A[i] + A[j] + i - j;</span><br><span class="line">		result = Math.max(max, result);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="正确代码如下："><a href="#正确代码如下：" class="headerlink" title="正确代码如下："></a>正确代码如下：</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">package</span> solution;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">import</span> java.math.*;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">solution</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxScoreSightseeingPair</span><span class="params">(<span class="keyword">int</span>[] A)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">int</span> n = A.length;</span><br><span class="line">		<span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">int</span> left = A[<span class="number">0</span>] + <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; n; j++) &#123;</span><br><span class="line">			result = Math.max(result, left + A[j] - j);</span><br><span class="line">			<span class="keyword">if</span> (A[j] + j &gt; left) &#123;</span><br><span class="line">				left = A[j] + j;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> result;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		solution s = <span class="keyword">new</span> solution();</span><br><span class="line">		<span class="keyword">int</span>[] b = &#123; <span class="number">8</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">2</span>, <span class="number">6</span> &#125;;</span><br><span class="line">		System.out.print(s.maxScoreSightseeingPair(b));</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
@@ -349,6 +349,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/09/17/LEETCODE1011-在D天内送达包裹的能力/" rel="prev" title="LEETCODE1011,在D天内送达包裹的能力">
+                LEETCODE1011,在D天内送达包裹的能力 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -425,7 +429,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -438,7 +442,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
